@@ -7,12 +7,28 @@ export default function Movies() {
     const [userJob, setUserJob] = useState();
     
     useEffect(() => {
+        // syncronous 
+        // here second function called after first function completed
+         getUserData(function() {
+             console.log("first level api");
+             getUserData(function() {
+                 console.log("second level API");
+                  getUserData(function() {
+                      console.log("Third level API");
+                  })
+             })
+         });
+
+         // asyncrouns 
+         // here second function call while first function running
+         getUserData()
+         getUserData();
          getUserData();
     },[])
 
-    const getUserData = () => {
+    const getUserData = (callback) => {
         
-        // AJAX ----- asyncronous javascript xml
+        // AJAX ----- asyncronous javasgit gitcript xml
         
         // XML looks like HTML. It has some restrictuion and it is also heavy
         // so we should use JSON to transfer data and get the data
@@ -25,7 +41,7 @@ export default function Movies() {
         const xhrUserData = new XMLHttpRequest();
         console.log("opening the connection");
         // API methods : PUT, GET, POST, PATCH, DELETE
-        xhrUserData.open("GET","https://reqres.in/api/users?page=1");
+        xhrUserData.open("GET","https://reqres.in/api/users?page=1?delay=40");
 
         console.log("Make the call API");
         xhrUserData.send();
@@ -45,7 +61,9 @@ export default function Movies() {
                 console.log("json resonse type",JSON.parse(this.responseText));
                 const user = JSON.parse(this.responseText);
                 setUserData(user);
-                
+                if(callback){
+                    callback();
+                }
             }
         })
 
