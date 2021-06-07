@@ -1,0 +1,22 @@
+.headerController {
+    display: flex;
+    // justify-content: flex-end;
+    // background-color: $third;
+
+    .link {
+        cursor: pointer;
+        // margin-right: 12px;
+        text-transform: capitalize;
+        padding: 8px;
+        margin: 0px;
+        transition: 0.3s all ease-in-out;
+        &.selected {
+            color: $primary;
+            border-bottom: 4px solid $primary;
+        }
+        &:hover{
+            color: lighten($color: $primary, $amount: 1);
+            border-bottom: 4px solid $primary;
+        }
+    }
+}
