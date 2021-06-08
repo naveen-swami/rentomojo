@@ -27,11 +27,11 @@ export default function Movies() {
 
     return (
         <div className="movie-controller">
-            {movieData && Array(30).fill().map((item, index) => (
-                // <Card key={index} movieId={movieData[index]}/>
-                <Card key={index}
-                    imageUrl="https://m.media-amazon.com/images/M/MV5BOThlNjdhZmQtNzlkOS00M2VjLWI0ZjUtZDExZDI1MjRhZGFkXkEyXkFqcGdeQW1yb3NzZXI@._V1_.jpg"
-                    title={movieData[index]} year="2019" rating="5" />
+            {movieData && Array(25).fill().map((item, index) => (
+                <Card key={index} movieId={movieData[index]}/>
+                // <Card key={index}
+                //     imageUrl="https://m.media-amazon.com/images/M/MV5BOThlNjdhZmQtNzlkOS00M2VjLWI0ZjUtZDExZDI1MjRhZGFkXkEyXkFqcGdeQW1yb3NzZXI@._V1_.jpg"
+                //     title={movieData[index]} year="2019" rating="5" />
             ))}
         </div>
     )

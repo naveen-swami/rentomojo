@@ -11,6 +11,7 @@ import PromiseUsingFetch from './callback-promise/PromiseUsingFetch';
 import FetchDataUsingAxios from './callback-promise/FetchDataUsingAxios';
 import { Fragment } from 'react/cjs/react.development';
 import Header from './component/common/header/Header';
+import DetailPage from './component/screens/detailPage/DetailPage';
 
 function Controller() {
     return (
@@ -19,6 +20,7 @@ function Controller() {
                 <Header />
                 <Switch>
                     <Route exact path="/" render={() => <Movies />} />
+                    <Route path="/movie/:movieId" render={() => <DetailPage />} />
                     <Route path="/series" render={() => <Series />} />
                     <Route exact path="/axios" render={() => <FetchDataUsingAxios />} />
                     <Route exact path="/promise-using-fetch" render={() => <PromiseUsingFetch />} />
