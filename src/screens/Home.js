@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ListGroup, Table } from 'reactstrap';
-import { Link } from 'react-router-dom'
-function Home() {
+import { Link, useHistory } from 'react-router-dom'
+function Home({userId, userSetter}) {
 
     const [userData, setUserData] = useState();
+    const history = useHistory();
 
     useEffect(() => {
         getUsers();
@@ -26,6 +27,11 @@ function Home() {
         // .then(jsonResponse => setUserData(jsonResponse)) ===     .then(setUserData)
     }
 
+    function takeToPost(userId) {
+        userSetter(userId);
+        history.push("/post")
+    }
+
     return (
         <Table hover>
             <thead>
@@ -44,8 +50,9 @@ function Home() {
                             <th scope="row" key={index}>{user.id}</th>
                             <td key={index}>{user.name}</td>
                             <td key={index}>{user.company.name}</td>
-                            <td key={index}>
-                                <Link to={"/post?userId=" + user.id} >Posts</Link>
+                            <td key={index} style={{cursor:"pointer"}} onClick={() => takeToPost(user.id)}>
+                                Posts
+                                {/* <Link to={"/post?userId=" + user.id} >Posts</Link> */}
                             </td>
                         </tr>
                     ))}

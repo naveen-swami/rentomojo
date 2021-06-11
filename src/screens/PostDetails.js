@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaction, useHistory, useLocation } from 'react-router-dom';
 
-export default function PostDetails() {
+export default function PostDetails({userId,  postId}) {
 
     const history = useHistory();
-    const { search } = useLocation();
+    // const { search } = useLocation();
 
-    const urlPrams = new URLSearchParams(search);
-    const postId = urlPrams.get("postId")
+    // const urlPrams = new URLSearchParams(search);
+    // const postId = urlPrams.get("postId")
     const [postData, setPostData] = useState();
     const [comments, setcomments] = useState();
 
@@ -42,22 +42,22 @@ export default function PostDetails() {
 
         fetch("https://jsonplaceholder.typicode.com/posts/"+ postId, {
             method: "DELETE"
-        }).then(response => response.text()).then(history.push("post/?userId="+postData.userId));
+        }).then(response => response.text()).then(history.push("post/"));
     }
 
 
     return (
         <div>
             <p>Post Details 
-                <span onClick={deletePost} style={{fontSize:50, marginLeft:'35%', cursor: 'pointer'}}>
+                <span onClick={deletePost} style={{color: 'red',fontSize:50, marginLeft:'35%', cursor: 'pointer'}}>
                     X
                     </span>
                 </p>
             <table>
 
                 {postData &&
-                    <tr>
-                        <td>{postData.title}</td>
+                    <tr style={{border: '2px solid black'}}>
+                        <td style={{border: '2px solid black'}}>{postData.title}</td>
                         <td>{postData.body}</td>
                     </tr>
                 }
@@ -68,7 +68,7 @@ export default function PostDetails() {
                 {
                     comments &&(
                     <thead>
-                        <tr>
+                        <tr style={{border: '2px solid black'}}>
                             <th>Name </th>
                             <th>Email</th>
                             <th>Body</th>
@@ -76,10 +76,10 @@ export default function PostDetails() {
                     </thead>
                     )}
                 {comments && comments.map(comment => (
-                    <tr>
-                        <td>{comment.name}</td>
-                        <td>{comment.email}</td>
-                        <td>{comment.body}</td>
+                    <tr style={{border: '2px solid black'}}>
+                        <td style={{border: '2px solid black'}}>{comment.name}</td>
+                        <td style={{border: '2px solid black'}}>{comment.email}</td>
+                        <td style={{border: '2px solid black'}}>{comment.body}</td>
                     </tr>
                 ))
                 }
