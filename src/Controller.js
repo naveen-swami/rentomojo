@@ -1,33 +1,34 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router';
-import Movies from './component/screens/movies/Movie';
-import Series from './component/screens/series/Series'
-import UseRedcuerIncrrementDecrement from './useReducer/UseRedcuerIncrrementDecrement';
-import CallBack from './callback-promise/Callback';
-import PromiseExample from './callback-promise/PromiseExample';
-import AsyncWait from './callback-promise/AsyncWait';
-import PromiseUsingFetch from './callback-promise/PromiseUsingFetch';
-import FetchDataUsingAxios from './callback-promise/FetchDataUsingAxios';
-import { Fragment } from 'react/cjs/react.development';
-import Header from './component/common/header/Header';
-import DetailPage from './component/screens/detailPage/DetailPage';
+import Home from './screens/Home';
+import Post from './screens/Post';
+import PostDetails from './screens/PostDetails';
+import { TopNavBar } from './component/TopNavBar';
 
 function Controller() {
     return (
         <div>
             <BrowserRouter >
-                <Header />
+                 <TopNavBar />
                 <Switch>
-                    <Route exact path="/" render={() => <Movies />} />
-                    <Route path="/movie/:movieId" render={() => <DetailPage />} />
-                    <Route path="/series" render={() => <Series />} />
-                    <Route exact path="/axios" render={() => <FetchDataUsingAxios />} />
-                    <Route exact path="/promise-using-fetch" render={() => <PromiseUsingFetch />} />
-                    <Route exact path="/async-wait" render={() => <AsyncWait />} />
-                    <Route exact path="/promise-example" render={() => <PromiseExample />} />
-                    <Route exact path="/callback" render={() => <CallBack />} />
-                    <Route exact path="/use-reducer" render={() => <UseRedcuerIncrrementDecrement />} />
+                    <Route exact path="/" render={() => <Home />} />
+                    {/* second way */}
+                    <Route path="/post" render={() => <Post />} />
+                    <Route path="/post-details">
+                        <PostDetails />
+                    </Route>
+
+                    {/* Third way */}
+                    {/* <Link to="/">
+                        <Home />
+                    </Link>
+                    <Link to="/post">
+                        <Post />
+                    </Link>
+                    <Link to="/post-details">
+                        <PostDetails />
+                    </Link> */}
                 </Switch>
             </BrowserRouter>
         </div>
@@ -35,30 +36,3 @@ function Controller() {
 }
 
 export default Controller
-
-// function test() {
-//     return (
-//         <Fragment>
-//             <div>
-//                 test 1
-//             </div>
-//             <div>
-//                 test2
-//             </div>
-//         </Fragment>
-//     )
-// }
-
-
-// function test1() {
-//     return (
-//         <>
-//             <div>
-//                 test 1
-//             </div>
-//             <div>
-//                 test2
-//             </div>
-//         </>
-//     )
-// }
