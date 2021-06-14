@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState  } from 'react';
 import { useLoaction, useHistory, useLocation } from 'react-router-dom';
-
-export default function PostDetails({userId,  postId}) {
+import { PostContex } from '../Controller';
+export default function PostDetails() {
 
     const history = useHistory();
     // const { search } = useLocation();
@@ -10,6 +10,8 @@ export default function PostDetails({userId,  postId}) {
     // const postId = urlPrams.get("postId")
     const [postData, setPostData] = useState();
     const [comments, setcomments] = useState();
+
+    const { postId } = useContext(PostContex);
 
     useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/posts/" + postId).
@@ -29,7 +31,7 @@ export default function PostDetails({userId,  postId}) {
 
         // postData.userId
         // 1) Depending on API call which is bad desgin
-        
+
         // history.goBack() 
         // only works, when we have come from posts page
 
@@ -40,7 +42,7 @@ export default function PostDetails({userId,  postId}) {
         // 1) looks bad!!
         // 2) security
 
-        fetch("https://jsonplaceholder.typicode.com/posts/"+ postId, {
+        fetch("https://jsonplaceholder.typicode.com/posts/" + postId, {
             method: "DELETE"
         }).then(response => response.text()).then(history.push("post/"));
     }
@@ -48,16 +50,16 @@ export default function PostDetails({userId,  postId}) {
 
     return (
         <div>
-            <p>Post Details 
-                <span onClick={deletePost} style={{color: 'red',fontSize:50, marginLeft:'35%', cursor: 'pointer'}}>
+            <p>Post Details
+                <span onClick={deletePost} style={{ color: 'red', fontSize: 50, marginLeft: '35%', cursor: 'pointer' }}>
                     X
-                    </span>
-                </p>
+                </span>
+            </p>
             <table>
 
                 {postData &&
-                    <tr style={{border: '2px solid black'}}>
-                        <td style={{border: '2px solid black'}}>{postData.title}</td>
+                    <tr style={{ border: '2px solid black' }}>
+                        <td style={{ border: '2px solid black' }}>{postData.title}</td>
                         <td>{postData.body}</td>
                     </tr>
                 }
@@ -66,20 +68,20 @@ export default function PostDetails({userId,  postId}) {
             <h1 style={{ cursor: 'pointer' }} onClick={() => loadComments()}>Load Comments</h1>
             <table>
                 {
-                    comments &&(
-                    <thead>
-                        <tr style={{border: '2px solid black'}}>
-                            <th>Name </th>
-                            <th>Email</th>
-                            <th>Body</th>
-                        </tr>
-                    </thead>
+                    comments && (
+                        <thead>
+                            <tr style={{ border: '2px solid black' }}>
+                                <th>Name </th>
+                                <th>Email</th>
+                                <th>Body</th>
+                            </tr>
+                        </thead>
                     )}
                 {comments && comments.map(comment => (
-                    <tr style={{border: '2px solid black'}}>
-                        <td style={{border: '2px solid black'}}>{comment.name}</td>
-                        <td style={{border: '2px solid black'}}>{comment.email}</td>
-                        <td style={{border: '2px solid black'}}>{comment.body}</td>
+                    <tr style={{ border: '2px solid black' }}>
+                        <td style={{ border: '2px solid black' }}>{comment.name}</td>
+                        <td style={{ border: '2px solid black' }}>{comment.email}</td>
+                        <td style={{ border: '2px solid black' }}>{comment.body}</td>
                     </tr>
                 ))
                 }

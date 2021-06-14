@@ -5,27 +5,36 @@ import Home from './screens/Home';
 import Post from './screens/Post';
 import PostDetails from './screens/PostDetails';
 import { TopNavBar } from './component/TopNavBar';
+const UserContex = React.createContext(null);
+const PostContex = React.createContext();
+export { UserContex, PostContex };
 
 function Controller() {
 
     const [userId, setUserId] = useState(1);
     const [postId, setPostId] = useState(1);
+    const { Provider: UserProvider } = UserContex;
+    const { Provider: PostProvider } = PostContex;
 
     return (
         <div>
             <BrowserRouter >
                 <TopNavBar />
-                {/* currentUser:{userId} */}
-                <Switch>
-                    <Route exact path="/" render={() => <Home userId={userId} userSetter={setUserId} />} />
-                    {/* second way */}
-                    <Route path="/post" render={() => <Post userId={userId} postId={postId} postSetter={setPostId}/>} />
-                    <Route path="/post-details">
-                        <PostDetails userId={userId} postId={postId}/>
-                    </Route>
+                <div style={{ margin: 8 }}>
+                    {/* currentUser:{userId} */}
+                    <UserProvider value={{ userId, setUserId }}>
+                        <Switch>
+                            <Route exact path="/" render={() => <Home />} />
+                            {/* second way */}
+                            <PostProvider value={{ postId, setPostId }}>
+                                <Route path="/post" render={() => <Post />} />
+                                <Route path="/post-details">
+                                    <PostDetails />
+                                </Route>
+                            </PostProvider>
 
-                    {/* Third way */}
-                    {/* <Link to="/">
+                            {/* Third way */}
+                            {/* <Link to="/">
                         <Home />
                     </Link>
                     <Link to="/post">
@@ -34,7 +43,9 @@ function Controller() {
                     <Link to="/post-details">
                         <PostDetails />
                     </Link> */}
-                </Switch>
+                        </Switch>
+                    </UserProvider>
+                </div>
             </BrowserRouter>
         </div>
     )

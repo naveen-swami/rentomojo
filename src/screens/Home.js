@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { ListGroup, Table } from 'reactstrap';
 import { Link, useHistory } from 'react-router-dom'
-function Home({userId, userSetter}) {
+import { UserContex } from '../Controller'
+function Home() {
 
     const [userData, setUserData] = useState();
     const history = useHistory();
+    const { userId, setUserId } = useContext(UserContex);
 
     useEffect(() => {
         getUsers();
@@ -28,7 +30,7 @@ function Home({userId, userSetter}) {
     }
 
     function takeToPost(userId) {
-        userSetter(userId);
+        setUserId(userId);
         history.push("/post")
     }
 
@@ -50,7 +52,7 @@ function Home({userId, userSetter}) {
                             <th scope="row" key={index}>{user.id}</th>
                             <td key={index}>{user.name}</td>
                             <td key={index}>{user.company.name}</td>
-                            <td key={index} style={{cursor:"pointer"}} onClick={() => takeToPost(user.id)}>
+                            <td key={index} style={{ cursor: "pointer" }} onClick={() => takeToPost(user.id)}>
                                 Posts
                                 {/* <Link to={"/post?userId=" + user.id} >Posts</Link> */}
                             </td>
