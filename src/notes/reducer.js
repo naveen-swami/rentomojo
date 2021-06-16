@@ -41,3 +41,11 @@ const state4 = { ...state, subState: { subStateName: "Naveen Swami" } };
 console.log("State: ",state);
 console.log(state4);
 
+
+
+// reducer : it is pure function
+
+// Pure function
+//   1) for same input same output
+//   2) No side effects
+//      i) outside value are not altered
