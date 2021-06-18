@@ -1,13 +1,7 @@
 
-const defaultState = {
-    counter: 0,
-    userState: {
-        name: "Naveen",
-        id: 5
-    }
-}
-
 // at begging state = defualtSate
+
+import { defaultState } from "./defaultState";
 
 export default function rootReducer(state = defaultState, action) {
     switch (action.type) {
@@ -20,14 +14,6 @@ export default function rootReducer(state = defaultState, action) {
             return {
                 ...state,
                 counter: state.counter - 1
-            }
-        case 'updateName':
-            return {
-                ...state,
-                userState: {
-                    ...state.userState,
-                    name: action.name
-                }
             }
         default:
             return state;

@@ -47,9 +47,9 @@ function Home(props) {
             <div>
                 <button onClick={() => props.increment()}>Incremnt</button>
                 <button onClick={() => props.decrement()}>Decrement</button>
-                <p>{props.reduxState.counter}</p>
+                <p>{props.reduxState.rootReducer.counter}</p>
                 Enter Name: <input onChange={newName} type="text"></input>
-                <p>{props.reduxState.userState.name}</p>
+                <p>{props.reduxState.userReducer.userState.name}</p>
             </div>
             <Table hover>
                 <thead>

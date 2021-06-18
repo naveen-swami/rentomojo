@@ -6,7 +6,7 @@ import Post from './screens/Post';
 import PostDetails from './screens/PostDetails';
 import { TopNavBar } from './component/TopNavBar';
 import rSore from "./store";
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 
 const UserContex = React.createContext(null);
 const PostContex = React.createContext();
