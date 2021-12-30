@@ -1,5 +1,7 @@
 const state = {
-    counter: 5, subCounter: 2, subState: {
+    counter: 5, 
+    subCounter: 2, 
+    subState: {
         subStateName: "Naveen",
     }
 }
@@ -12,7 +14,7 @@ state1.counter = 2;
 console.log(state);
 console.log(state1);
 
-// using spread operator we can acchive first lever copy so that both state are differnt
+// using spread operator we can acchive first level copy so that both state are differnt
 // ... spread operator helps to 1st level copy
 const state2 = { ...state };
 state2.counter = 1;
@@ -49,3 +51,15 @@ console.log(state4);
 //   1) for same input same output
 //   2) No side effects
 //      i) outside value are not altered
+//   3) Which takes in an action and return the updated state
+
+function abc(obj) {
+    obj.a = 1;
+}
+
+function pureAbc(obj) {
+    return ({...obj, b:2});
+}
+
+abc({a:1, b: 4});  // impure function because it is updated obj values
+pureAbc({a: 1, b: 4}); // pure function because it does not update obj values. It return new obj with different values;

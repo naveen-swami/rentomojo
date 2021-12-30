@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { UserContex } from '../Controller'
 import { connect } from 'react-redux'
 function Home(props) {
-    console.log(props);
+    console.log("props:  ",props);
 
     const [userData, setUserData] = useState();
     const history = useHistory();
@@ -81,13 +81,14 @@ function Home(props) {
 }
 
 const mapStateToProps = reduxState => {
+    console.log("inside redux state");
     console.log("State from redux", reduxState);
     return { reduxState }
     // return reduxState;
 }
 
 const mapDispatchToProps = dispatch => {
-    //   console.log(typeof dispatch);
+      console.log("inside dispatch");
     return {
         increment: () => dispatch({
             type: "increment"
