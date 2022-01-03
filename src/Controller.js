@@ -5,7 +5,7 @@ import Home from './screens/Home';
 import Post from './screens/Post';
 import PostDetails from './screens/PostDetails';
 import { TopNavBar } from './component/TopNavBar';
-import rSore from "./store";
+import store from "./store";
 import { Provider } from 'react-redux' // Provider is context provider (provide store to context)
 
 const UserContex = React.createContext(null);
@@ -24,7 +24,7 @@ function Controller() {
             <BrowserRouter >
                 <TopNavBar />
                 <div style={{ margin: 8 }}>
-                    <Provider store={rSore()}>
+                    <Provider store={store}>
                         {/* currentUser:{userId} */}
                         <UserProvider value={{ userId, setUserId }}>
                             <Switch>

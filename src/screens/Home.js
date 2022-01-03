@@ -3,8 +3,12 @@ import { ListGroup, Table } from 'reactstrap';
 import { Link, useHistory } from 'react-router-dom'
 import { UserContex } from '../Controller'
 import { connect } from 'react-redux'
+import { GET_STUDENT } from '../redux/reducer/studentReducer';
+
 function Home(props) {
     console.log("props:  ",props);
+    const studnet = props.reduxState.studnetReducer.student
+    // console.log("student:", props.reduxState.studnetReducer.studnet);
 
     const [userData, setUserData] = useState();
     const history = useHistory();
@@ -12,6 +16,11 @@ function Home(props) {
 
     useEffect(() => {
         getUsers();
+    }, [])
+
+    useEffect(() => {
+        // console.log("inside use effect for student:")
+        props.getStudnet();
     }, [])
 
     function getUsers() {
@@ -44,6 +53,10 @@ function Home(props) {
 
     return (
         <>
+            <div>
+                { studnet && <h1> Hello { studnet.firstName + " " + studnet.lastName  } </h1> }
+                
+            </div>
             <div>
                 <button onClick={() => props.increment()}>Incremnt</button>
                 <button onClick={() => props.decrement()}>Decrement</button>
@@ -99,6 +112,9 @@ const mapDispatchToProps = dispatch => {
         updateName: (newName) => dispatch({
             type: "updateName",
             name: newName
+        }),
+        getStudnet: () => dispatch({
+            type: GET_STUDENT,
         })
     }
 }
